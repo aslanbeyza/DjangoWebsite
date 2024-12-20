@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Tasarımı</title>
+    <style>
+        /* Genel Footer Ayarları */
+        #footer {
+            background-color: #1a1a1a;
+            color: #b3b3b3;
+            font-family: 'Arial', sans-serif;
+            padding: 50px 20px;
+        }
+
+        #footer a {
+            color: #b3b3b3;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        #footer a:hover {
+            color: #ffffff;
+        }
+
+        #footer h5 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Sosyal Medya İkonları */
+        .social-links a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #b3b3b3;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Alt Çizgi ve Footer Alt */
+        #footer hr {
+            border-top: 5px solid #444444;
+            margin: 20px 0;
+        }
+
+        #footer-bottom {
+            background-color: #111111;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 13px;
+            color: #b3b3b3;
+        }
+
+        #footer-bottom a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Responsive Ayarlar */
+        @media (max-width: 768px) {
+            #footer .row {
+                text-align: center;
+            }
+
+            #footer .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 pb-4">
+                    <h1 class="mb-3">İncik Cincik</h1>
+                    <p>Web sitemizde, güvenle alışveriş yapabilir ve en yeni ürünlerimizi inceleyebilirsiniz. Bizi tercih ettiğiniz için teşekkür ederiz!</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 pb-4">
+                    <h5 class="text-uppercase">Hızlı Bağlantılar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Ana Sayfa</a></li>
+                        <li><a href="#">Hakkımızda</a></li>
+                        <li><a href="#">Ürünler</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-6 pb-4">
+                    <h5 class="text-uppercase">Yardım & Bilgi</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Sipariş Takibi</a></li>
+                        <li><a href="#">İade Politikası</a></li>
+                        <li><a href="#">Kargo ve Teslimat</a></li>
+                        <li><a href="#">SSS</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-6 pb-4">
+                    <h5 class="text-uppercase">İletişime Geçin</h5>
+                    <p>Bize sorularınızı göndermek için <a href="mailto:info@sirketiniz.com">info@sirketiniz.com</a></p>
+                    <p>Destek için hemen arayın: <a href="tel:+901234567890">+90 123 456 78 90</a></p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p>&copy; 2025 Tüm Haklar Saklıdır.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <img src="{% static 'images/visa.jpg' %}" alt="Visa" class="me-2">
+                    <img src="{% static 'images/mastercard.jpg' %}" alt="MasterCard" class="me-2">
+                    <img src="{% static 'images/paypal.jpg' %}" alt="PayPal">
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

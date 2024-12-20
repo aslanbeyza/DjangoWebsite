@@ -1,0 +1,111 @@
+{% load static %}
+{% load i18n %}
+{% block content %}
+<style>
+/* Genel Stil */
+body {
+    background: linear-gradient(135deg, #fff, #fff); /* Arka plan gradient */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    color: #333;
+}
+
+/* Container Ortalaması */
+.container {
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    height: 100vh; /* Ekran yüksekliği kadar */
+    padding: 20px;
+}
+
+/* Form Kutusu */
+form {
+    display: flex;
+    flex-direction: column; /* Elemanları dikey hizala */
+    justify-content: center; /* İçeriği dikeyde ortala */
+    background: #fff; /* Form arka planı */
+    border: 2px solid #000;
+    border-radius: 10px; /* Köşeleri yuvarlaklaştır */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Gölge efekti */
+    padding: 30px; /* İç boşluk */
+    width: 500px; /* Form genişliği */
+    height: 450px; /* Form yüksekliği */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Input Alanları */
+.form-control {
+    padding: 12px 15px; /* İç boşluk */
+    margin-bottom: 20px; /* Elemanlar arası boşluk */
+    border: 2px solid #ddd; /* Çerçeve rengi */
+    border-radius: 5px; /* Köşeleri yuvarlat */
+    width: 100%; /* Form genişliğine göre input genişliği */
+    box-sizing: border-box; /* Padding dahil genişlik */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #fff; /* Odaklandığında border rengi */
+    box-shadow: 0 0 8px #fff; /* Gölge efekti */
+}
+
+/* Buton Stili */
+.btn-dark {
+    background-color: #000; /* Buton rengi */
+    border-color: #000;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px 20px; /* Buton boyutu */
+    font-size: 16px;
+    border-radius: 50px; /* Köşeleri yuvarlak */
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%; /* Buton genişliği */
+}
+
+.btn-primary:hover {
+    background-color: #e6dce2; /* Hover buton rengi */
+    transform: translateY(-2px);
+}
+
+/* Başlık */
+h1 {
+    color: #333; /* Yazı rengi */
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center; /* Ortalanmış başlık */
+    margin-bottom: 30px;
+}
+</style>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-8 col-md-10 col-sm-12"> <!-- YORUM: Form kapsayıcısı -->
+           <!-- YORUM: h1 başlık -->
+            <form method="post"> <!-- YORUM: Form kutusu -->
+                {% csrf_token %}
+                <h1>{% trans 'KAYIT OL' %}</h1>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">{% trans 'Ad' %}</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">{% trans 'Soyad' %}</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="surname">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">{% trans 'E-Posta Adresi' %}</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="E-postanızı girin">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">{% trans 'Şifre' %}</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Şifrenizi girin">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-dark">{% trans 'Üye Ol' %}</button> <!-- YORUM: Giriş butonu -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

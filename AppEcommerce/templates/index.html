@@ -1,0 +1,453 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section id="billboard" class="position-relative overflow-hidden">
+  <div class="swiper main-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="container">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-6">
+              <div class="banner-content">
+                <h1 class="display-2 text-uppercase text-dark pb-5">Sevdiklerinize unutulmaz anılar hediye edin.</h1>
+                <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Hemen Alışveriş Yap</a>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="image-holder">
+                <img src="{% static 'images/banner-image.png' %}" alt="banner">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="container">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-md-6">
+              <div class="banner-content">
+                <h1 class="display-2 text-uppercase text-dark pb-5">Özel Koleksiyonlar Sizi Bekliyor</h1>
+                <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Koleksiyonu İnceleyin</a>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="image-holder">
+                <img src="{% static 'images/banner-image.png' %}" alt="banner">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Navigation Buttons -->
+    <div class="swiper-icon swiper-arrow swiper-arrow-prev">
+      <svg class="chevron-left">
+        <use xlink:href="#chevron-left" />
+      </svg>
+    </div>
+    <div class="swiper-icon swiper-arrow swiper-arrow-next">
+      <svg class="chevron-right">
+        <use xlink:href="#chevron-right" />
+      </svg>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<section id="company-services" class="padding-large">
+  <style>
+    #company-services .icon-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      background-color: #2b2b2b;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+      min-height: 180px;
+    }
+
+    #company-services .icon-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    #company-services .icon-box-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    #company-services .icon-box-icon svg {
+      fill: #ffffff;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #company-services .icon-box-content {
+      margin-left: 15px;
+    }
+
+    #company-services .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ffffff !important;
+    }
+
+    #company-services p {
+      font-size: 0.9rem;
+      color: #bfbfbf;
+    }
+
+    @media (max-width: 768px) {
+      #company-services .icon-box {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      #company-services .icon-box-content {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+    }
+
+    .product-card .image-holder img {
+    width: 100%; /* Kart genişliğini doldurur */
+    height: 250px; /* Sabit yükseklik */
+    object-fit: cover; /* Görüntüyü kırpmadan uyumlu hale getirir */
+    border-radius: 8px; /* Kenarları yuvarlatır */
+}
+.cart-concern {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.cart-button {
+    width: 100%; /* Tüm alanı kaplasın */
+}
+
+  </style>
+  <div class="container">
+    <div class="row">
+      <!-- Ücretsiz Teslimat -->
+      <div class="col-lg-3 col-md-6 pb-3 width-100 height-100">
+        <div class="icon-box d-flex">
+          <div class="icon-box-icon pe-3 pb-3">
+            <svg class="cart-outline">
+              <use xlink:href="#cart-outline" />
+            </svg>
+          </div>
+          <div class="icon-box-content">
+            <h3 class="card-title text-uppercase text-dark">Ücretsiz Teslimat</h3>
+            <p>Her siparişiniz kapınıza ücretsiz teslim edilir.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Kalite Garantisi -->
+      <div class="col-lg-3 col-md-6 pb-3">
+        <div class="icon-box d-flex">
+          <div class="icon-box-icon pe-3 pb-3">
+            <svg class="quality">
+              <use xlink:href="#quality" />
+            </svg>
+          </div>
+          <div class="icon-box-content">
+            <h3 class="card-title text-uppercase text-dark">Kalite Garantisi</h3>
+            <p>Ürünlerimiz, kalite standartlarına uygun olarak üretilir.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Günlük Kampanyalar -->
+      <div class="col-lg-3 col-md-6 pb-3">
+        <div class="icon-box d-flex">
+          <div class="icon-box-icon pe-3 pb-3">
+            <svg class="price-tag">
+              <use xlink:href="#price-tag" />
+            </svg>
+          </div>
+          <div class="icon-box-content">
+            <h3 class="card-title text-uppercase text-dark">Günlük Kampanyalar</h3>
+            <p>Her gün yenilenen fırsatlarla alışveriş keyfi.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Güvenli Ödeme -->
+      <div class="col-lg-3 col-md-6 pb-3">
+        <div class="icon-box d-flex">
+          <div class="icon-box-icon pe-3 pb-3">
+            <svg class="shield-plus">
+              <use xlink:href="#shield-plus" />
+            </svg>
+          </div>
+          <div class="icon-box-content">
+            <h3 class="card-title text-uppercase text-dark">%100 Güvenli Ödeme</h3>
+            <p>Ödeme bilgileriniz her zaman güvendedir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id="küpe-id" class="product-store position-relative padding-large no-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">{% trans "Küpe" %}</h2>
+            <div class="btn-right">
+              <a href="{% url "category" %}" class="btn btn-dark btn-normal text-decoration-none text-uppercase">{% trans "Tüm Küpeler" %}</a>
+            </div>
+          </div>
+          <div class="swiper product-swiper">
+            <div class="swiper-wrapper">
+
+              {% for  product in products   %}
+              {% if product.category.category == "Küpe" %}
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="{{product.image.url}}" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline flex-column pt-3">
+                    <h3 class="card-title text-uppercase">
+                    {{product.brand}}
+                    </h3>
+                    <h6 class="card-title text-uppercase">
+                      <a href="#">{{product.model}}</a>
+                    </h3>
+                  </div>
+                  <span class="item-price text-primary">{{product.price}} TL</span>
+                </div>
+              </div>
+              {%endif%}
+              {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination position-absolute text-center"></div>
+    </section>
+    <section id="kolye-id" class="product-store position-relative padding-large no-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">{% trans "Kolye" %}</h2>
+            <div class="btn-right">
+              <a href="{% url "category" %}" class="btn btn-dark btn-normal text-decoration-none text-uppercase">{% trans "Tüm Kolyeler" %}</a>
+            </div>
+          </div>
+          <div class="swiper product-swiper">
+            <div class="swiper-wrapper">
+    
+              {% for product in products %}
+              {% if product.category.category == "Kolye" %}
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="{{ product.image.url }}" alt="product-item" class="img-fluid">
+                  </div>
+                  
+                  <div class="card-detail d-flex justify-content-between align-items-baseline flex-column pt-3">
+                    <h3 class="card-title text-uppercase">{{ product.brand }}</h3>
+                    <h6 class="card-title text-uppercase">
+                      <a href="#">{{ product.model }}</a>
+                    </h6>
+                  </div>
+                  <span class="item-price text-primary">{{ product.price }} TL</span>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+    
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination position-absolute text-center"></div>
+    </section>
+    
+    
+    
+    <section id="bileklik-id" class="product-store position-relative padding-large no-padding-top">
+      <div class="container">
+          <div class="row">
+              <div class="display-header d-flex justify-content-between pb-3">
+                  <h2 class="display-7 text-dark text-uppercase">{% trans "Bileklik" %}</h2>
+                  <div class="btn-right">
+                      <a href="{% url "category" %}" class="btn btn-dark btn-normal text-decoration-none text-uppercase">{% trans "Tüm Bileklikler" %}</a>
+                  </div>
+              </div>
+              <div class="swiper product-swiper">
+                  <div class="swiper-wrapper">
+                      {% for product in products %}
+                      {% if product.category.category == "Bileklik" %}
+                      <div class="swiper-slide">
+                          <div class="product-card position-relative">
+                              <div class="image-holder">
+                                  <img src="{{product.image.url}}" alt="product-item" class="img-fluid">
+                              </div>
+                              <div class="cart-concern position-absolute">
+                                  <div class="cart-button d-flex">
+                                      <a href="#" class="btn btn-medium btn-black">{% trans "Sepete Ekle" %}
+                                          <svg class="cart-outline">
+                                              <use xlink:href="#cart-outline"></use>
+                                          </svg>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="card-detail d-flex justify-content-between align-items-baseline flex-column pt-3">
+                                  <h3 class="card-title text-uppercase">{{product.brand}}</h3>
+                                  <h6 class="card-title text-uppercase">
+                                      <a href="#">{{product.model}}</a>
+                                  </h6>
+                                  <span class="item-price text-primary">{{product.price}} TL</span>
+                              </div>
+                          </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+          <div class="swiper-pagination position-absolute text-center"></div>
+      </div>
+  </section>
+  
+
+    <section id="yüzük-id" class="product-store padding-large position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">{% trans "Yüzük" %}</h2>
+            <div class="btn-right">
+              <a href="{% url "category" %}" class="btn btn-dark btn-normal text-decoration-none text-uppercase">{% trans "Tüm Yüzükler" %}</a>
+            </div>
+          </div>
+          <div class="swiper product-watch-swiper">
+            <div class="swiper-wrapper">
+              {% for product in products %}
+              {% if product.category.category == "yüzük" %}
+              <div class="swiper-slide">
+                <div class="product-card position-relative d-flex flex-column justify-content-between" style="height: 100%; padding: 15px;">
+                  <!-- Ürün Resmi -->
+                  <div class="image-holder">
+                    <img src="{{product.image.url}}" alt="product-item" class="img-fluid">
+                  </div>
+                  <!-- Ürün Detayları -->
+                  <div class="card-detail d-flex justify-content-between align-items-baseline flex-column pt-3">
+                    <h3 class="card-title text-uppercase">{{product.brand}}</h3>
+                    <h6 class="card-title text-uppercase">
+                      <a href="#">{{product.model}}</a>
+                    </h6>
+                    <span class="item-price text-primary">{{product.price}} TL</span>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination position-absolute text-center"></div>
+    </section>
+
+<section id="testimonials" class="position-relative">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
+      <p class="section-description">Mutlu müşterilerimizin yorumlarını keşfedin.</p>
+    </div>
+    <div class="row">
+      <div class="review-content position-relative">
+        <div class="swiper testimonial-swiper">
+          <div class="quotation text-center">
+            <svg class="quote">
+              <use xlink:href="#quote" />
+            </svg>
+          </div>
+          <div class="swiper-wrapper">
+            {% for comment in comments %}
+            <div class="swiper-slide text-center d-flex justify-content-center ">
+              <div class="review-item col-md-10">
+                <blockquote>{{ comment.comment }}</blockquote>
+                <div class="rating">
+                  {% for i in "12345"|slice:":5"|make_list %}
+                  {% if forloop.counter <= 5 %}
+                  <svg class="star star-fill">
+                    <use xlink:href="#star-fill"></use>
+                  </svg>
+                  {% else %}
+                  <svg class="star star-empty">
+                    <use xlink:href="#star-empty"></use>
+                  </svg>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="author-detail">
+                  <div class="name text-dark text-uppercase pt-2">
+                    {{ comment.first_name }} {{ comment.last_name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-icon swiper-arrow swiper-arrow-prev position-absolute d-flex align-items-center">
+            <svg class="chevron-left bg-dark">
+              <use xlink:href="#chevron-left" />
+            </svg>
+          </div>
+          <div class="swiper-icon swiper-arrow swiper-arrow-next position-absolute d-flex align-items-center">
+            <svg class="chevron-right bg-dark">
+              <use xlink:href="#chevron-right" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+    
+   {% endblock %}
+
+
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const swiper = new Swiper('.main-swiper', {
+        loop: true, // Döngü özelliği
+        autoplay: {
+          delay: 1000, // Her bir slaytın gösterim süresi (ms)
+          disableOnInteraction: true, // Kullanıcı etkileşiminden sonra autoplay devam eder
+        },
+        navigation: {
+          nextEl: '.swiper-arrow-next',
+          prevEl: '.swiper-arrow-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true, // Kullanıcının pagination ile gezinmesine izin ver
+        },
+      });
+    });
+  </script>

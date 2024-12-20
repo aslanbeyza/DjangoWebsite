@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+<div class="container" style="padding: 150px 0;">
+    <div class="row mb-5">
+        <h3 class="text-center text-secondary mb-4">Kişisel Bilgiler</h3>
+        <div class="col">
+            <div class="card border-0 shadow-sm" style="background-color: #f9f9f9;">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Ad' %}</label>
+                                <input type="text" class="form-control border-secondary" id="exampleInputEmail1" value="{{ profil.user.first_name }}" name="first_name">
+                            </div>
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Soyad' %}</label>
+                                <input type="text" class="form-control border-secondary" id="exampleInputEmail1" value="{{ profil.user.last_name }}" name="last_name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'E-Posta Adresi' %}</label>
+                                <input type="email" class="form-control border-secondary" id="exampleInputEmail1" value="{{ profil.user.email }}" name="email">
+                            </div>
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Telefon Numarası' %}</label>
+                                <input type="text" class="form-control border-secondary" id="exampleInputEmail1" 
+                                {% if profil.phone_number %} value="{{ profil.phone_number }}" {% else %} value="" {% endif %}
+                                name="phone_number" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Doğum Tarihi' %}</label>
+                                <input type="date" class="form-control border-secondary" id="exampleInputEmail1" value="{{ profil.birtdate|date:'Y-m-d' }}" name="birtdate" required>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <button type="submit" class="btn  btn-dark  d-block ms-auto" name="btnsubmit" value="btnprofil">{% trans 'Güncelle' %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <h3 class="text-center text-secondary mb-4">Adres Bilgileri</h3>
+        <div class="col">
+            <div class="card border-0 shadow-sm" style="background-color: #f9f9f9;">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'İl' %}</label>
+                                <input type="text" class="form-control border-secondary" id="exampleInputEmail1" 
+                                {% if adress.province %} value="{{ adress.province }}" {% endif %}
+                                name="province">
+                            </div>
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'İlçe' %}</label>
+                                <input type="text" class="form-control border-secondary" id="exampleInputEmail1" 
+                                {% if adress.district %} value="{{ adress.district }}" {% endif %}
+                                name="district">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Mahalle' %}</label>
+                                <input type="text" class="form-control border-secondary" id="exampleInputEmail1" 
+                                {% if adress.neighbourhood %} value="{{ adress.neighbourhood }}" {% endif %}
+                                name="neighbourhood">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Adres' %}</label>
+                                <textarea class="form-control border-secondary" id="exampleInputEmail1" cols="30" rows="10" name="adress">
+                                {% if adress.adress %}{{ adress.adress }}{% endif %}
+                                </textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark d-block ms-auto" name="btnsubmit" value="btnadress">{% trans 'Güncelle' %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <h3 class="text-center text-secondary mb-4">Şifre Değiştir</h3>
+        <div class="col">
+            <div class="card border-0 shadow-sm" style="background-color: #f9f9f9;">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Eski Şifre' %}</label>
+                                <input type="password" class="form-control border-secondary" id="exampleInputEmail1" name="oldpass">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Yeni Şifre' %}</label>
+                                <input type="password" class="form-control border-secondary" id="exampleInputEmail1" name="newpass">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label text-secondary">{% trans 'Yeni Şifre(Tekrar)' %}</label>
+                                <input type="password" class="form-control border-secondary" id="exampleInputEmail1" name="rnewpass">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark  d-block ms-auto" name="btnsubmit" value="btnpass">{% trans 'Güncelle' %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

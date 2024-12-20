@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+    <div class="container" style="padding: 150px 0;">
+        <div class="row">
+            <div class="col-3">
+                <form method="get">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    {% trans 'Markalar' %}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    {% for brand in brands %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ brand.id }}" id="brand{{ forloop.counter }}" name="marka" {% if brand.id|stringformat:"s" in request.GET.marka %}checked{% endif %}>
+                                            <label class="form-check-label" for="brand{{ forloop.counter }}">
+                                                {{ brand.brand }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                    {% trans 'Materyal' %}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    {% for material in materials %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ material.id }}" id="material{{ forloop.counter }}" name="materyal" {% if material.id|stringformat:"s" in request.GET.materyal %}checked{% endif %}>
+                                            <label class="form-check-label" for="material{{ forloop.counter }}">
+                                                {{ material.material }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNine" aria-expanded="false" aria-controls="panelsStayOpen-collapseNine">
+                                    {% trans 'Değerli Taşlar' %}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseNine" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    {% for gemstone in gemstones %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ gemstone.id }}" id="gemstone{{ forloop.counter }}" name="degerli_tas" {% if gemstone.id|stringformat:"s" in request.GET.degerli_tas %}checked{% endif %}>
+                                            <label class="form-check-label" for="gemstone{{ forloop.counter }}">
+                                                {{ gemstone.gemstone }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                                    {% trans 'Tarzlar' %}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    {% for style in styles %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ style.id }}" id="style{{ forloop.counter }}" name="tarz" {% if style.id|stringformat:"s" in request.GET.tarz %}checked{% endif %}>
+                                            <label class="form-check-label" for="style{{ forloop.counter }}">
+                                                {{ style.style }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
+                                    {% trans 'Fiyat' %}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse">
+                                <div class="accordion-body d-flex justify-content-center align-item-center">
+                                    <div>
+                                        <input class="form-control" name="fiyat_min" id="flexCheckDefaultMin" value="{{ request.GET.fiyat_min }}">
+                                    </div>
+                                    <p class="fs-4">-</p>
+                                    <div>
+                                        <input class="form-control" name="fiyat_max" id="flexCheckDefaultMax" value="{{ request.GET.fiyat_max }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark d-block w-100 mt-3">Filtrele</button>
+                    <a href="{% url 'category' %}" class="btn btn-dark d-block w-100 mt-3">Temizle</a>
+                </form>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-4">
+                            <div class="card position-relative bg-light-blue style="width: 100%;">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.brand }}</h5>
+                                    <p class="card-text text-dark">{{ product.model }}</p>
+                                    <p class="card-text text-dark">{{ product.price|intcomma }} TL</p>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{% url 'product-detail' product.id %}" class="btn btn-dark">Detaya Git</a>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ product.id }}" name="product_id">
+                                            <button type="submit" class="btn btn-dark" name="submit" value="btnbasket">Sepete Ekle</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row>
+                    <nav aria-label="..." class="d-flex justify-content-center w-100 ">
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination mt-5">
+                                {% if products.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.previous_page_number }}">{% trans 'Geri' %}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.number|add:'-1' }}">{{ products.number|add:'-1' }}</a>
+                                </li>
+                                {% endif %}
+                    
+                                <li class="page-item active">
+                                    <a class="page-link" href="?page={{ products.number }}">{{ products.number }}</a>
+                                </li>
+                    
+                                {% if products.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.number|add:'1' }}">{{ products.number|add:'1' }}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.next_page_number }}">{% trans 'İleri' %}</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        
+                    </nav>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+
+{% block extrajs %}
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+        // Marka Filtresi
+        const selectedMarkaId = urlParams.getAll('marka');
+        if (selectedMarkaId.length > 0) {
+            $.each(selectedMarkaId, function (index, marka) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="marka"][value="${marka}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+
+        // Fiyat Filtresi
+        const selectedMinFiyat = urlParams.get('fiyat_min');
+        const selectedMaxFiyat = urlParams.get('fiyat_max');
+        document.getElementById('flexCheckDefaultMin').value = selectedMinFiyat;
+        document.getElementById('flexCheckDefaultMax').value = selectedMaxFiyat;
+
+        // Materyal Filtresi
+        const selectedKasaSekliId = urlParams.getAll('materyal');
+        if (selectedKasaSekliId.length > 0) {
+            $.each(selectedKasaSekliId, function (index, materyal) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="materyal"][value="${materyal}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+        // Değerli Taş Filtresi
+        const selectedKayisTipiId = urlParams.getAll('degerli_tas');
+        if (selectedKayisTipiId.length > 0) {
+            $.each(selectedKayisTipiId, function (index, degerli_tas) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="degerli_tas"][value="${degerli_tas}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+        // Tarz Filtresi
+        const selectedTarzId = urlParams.getAll('tarz');
+        if (selectedTarzId.length > 0) {
+            $.each(selectedTarzId, function (index, tarz) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="tarz"][value="${tarz}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+   
+
+    });
+    </script>
+{% endblock extrajs %}
+    

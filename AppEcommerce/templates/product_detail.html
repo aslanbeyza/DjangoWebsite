@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+<div class="container" style="padding: 100px 0;">
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.brand }}">
+            </div>
+        </div>
+        <div class="col-md-7  bg-light-blue">
+            <div class="card shadow-lg border-0  h-100  align-item-center">
+                <div class="card-body">
+                    <h3 class="card-title mb-3">Marka: <span class="text-primary">{{ product.brand }}</span></h3>
+                    <h5 class="card-text mb-3">Model: {{ product.model }}</h5>
+                    <h5 class="card-text mb-3">Fiyat: <span class="text-danger">{{ product.price }}</span></h5>
+                    <p class="card-text text-muted">Açıklama: {{ product.description }}</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex align-items-center mb-4">
+                            <label for="quantity" class="me-3 mb-0" style="font-size: 1rem; font-weight: bold;">Adet:</label>
+                            <button type="button" class="btn btn-outline-dark btn-sm me-2 px-3 py-1" id="minus">-</button>
+                            <input type="number" class="form-control form-control-sm text-center me-2 shadow-sm" name="quantity" value="1" id="quantity" style="width: 60px;">
+                            <button type="button" class="btn btn-outline-dark btn-sm px-3 py-1" id="plus">+</button>
+                        </div>
+                        <div>
+                            <input type="hidden" value="{{ product.id }}" name="productid">
+                            <button type="submit" class="btn btn-dark w-100 fw-bold shadow" name="submit" value="btnbasket">Sepete Ekle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <form method="post">
+                {% csrf_token %}
+                <div class="card shadow-sm">
+                    {% for comment in comments %}
+                    <div class="card-body position-relative">
+                        <div class="d-flex align-items-center mb-3">
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">{{ comment.first_name }} {{ comment.last_name }}</h6>
+                                <p class="text-muted small mb-0">{{ comment.create_date }}</p>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-4">{{ comment.comment }}</p>
+                        <button type="button" class="btn btn-sm btn-dark position-absolute top-0 end-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-8.5 8.5a.5.5 0 0 1-.168.11l-4 1.5a.5.5 0 0 1-.651-.651l1.5-4a.5.5 0 0 1 .11-.168l8.5-8.5zm-2.207 3.5L4 10.293V12h1.707l6.146-6.146-1.707-1.707zm1-1L11.293 1.5 13.5 3.707l-.854.853L10.939 3.5z"/>
+                          </svg>
+                          
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Yorum Düzenle</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <textarea class="form-control" rows="4" name="comment" required>{{ comment.comment }}</textarea>
+                                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-dark btn-sm" name="submit" value="commentupdate">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% if comment_user is None %}
+                    <div class="card-footer">
+                        <textarea class="form-control mb-3" rows="4" name="comment" placeholder="Yorum yaz..."></textarea>
+                        <button type="submit" class="btn btn-primary w-100" name="submit" value="btncomment">Gönder</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    svg {
+    width: 10px;
+    height: 10px;
+    transition: fill 0.3s; 
+}
+
+svg:hover {
+    fill: #0056b3;
+}
+
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .btn-outline-dark {
+        transition: all 0.3s;
+    }
+
+    .btn-outline-dark:hover {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .btn-dark {
+        background-color: #212529;
+        color: #fff;
+    }
+
+    .btn-dark:hover {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+</style>
+<script>
+    var minus = document.getElementById("minus");
+    var plus = document.getElementById("plus");
+    var quantity = document.getElementById("quantity");
+
+    checkQuantity();
+
+    minus.addEventListener("click", function () {
+        quantity.value = Math.max(1, parseInt(quantity.value) - 1);
+        checkQuantity();
+    });
+
+    plus.addEventListener("click", function () {
+        quantity.value = parseInt(quantity.value) + 1;
+        checkQuantity();
+    });
+
+    function checkQuantity() {
+        minus.disabled = parseInt(quantity.value) <= 1;
+    }
+</script>
+{% endblock extrajs %}
